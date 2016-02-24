@@ -1,4 +1,4 @@
-﻿--Name: Ryan Neumann
+--Name: Ryan Neumann
 --Date: February 25, 2016
 --Topic: Lab 5
 
@@ -12,7 +12,7 @@ Where o.cid = 'c002';
 --2. Show the ids of products ordered through any agent who makes at least one
 --   order for a customer in Dallas, sorted by pid from highest to lowest.
 --   Use joins; no subqueries.
-Select o.pid
+Select distinct o.pid
 From orders o
 Inner join customers c
 On o.cid = c.cid
