@@ -65,8 +65,6 @@ Where dollars != truedollars
 The difference between left outer join and right outer join is which table is read first.  If you want all the rows in the right column to match any of the rows in the left column, you would use RIGHT OUTER JOIN, because it uses the right table first.  If you wanted to do the opposite, and select all the rows from the left table to match any of the rows in the right table, then you would use LEFT OUTER JOIN.  
 
 An example of LEFT OUTER JOIN would be:
-	select * from employee left outer join location 
-		on employee.empID = location.empID;
 		
 The left outer join would grab all the rows from employee and match them up with any location that matched that row.  
 
@@ -74,7 +72,7 @@ An example of RIGHT OUTER JOIN would be:
 	SELECT column_name(s)
 	FROM table1
 	RIGHT OUTER JOIN table2
-	ON table1.column_name=table2.column_name;
+	WHERE table1.column_name=table2.column_name;
 	
 	
 The RIGHT OUTER JOIN would take the data from table 2 first, and compare that to the data of table 1.  
