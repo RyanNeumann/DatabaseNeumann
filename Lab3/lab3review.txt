@@ -1,0 +1,44 @@
+9 pts
+
+Correct output for all queries
+Mostly correct SQL statements
+SQL statements are somewhat readable
+
+Recommendations: 
+ To improve your readability, write queries instead of this
+  select *
+  from products
+  where city not in ('Dallas', 'Duluth') and priceusd >= 1;
+ do it like this:
+  SELECT *
+  FROM products
+  WHERE city NOT IN ('Dallas', 'Duluth')
+    AND priceUSD >= 1;
+
+
+In general: 
+
+- Test all your SQL statements.
+
+- You submitted a text file, that was not runnable, I had to convert your
+  file to remove special characters (see below). Please check the file I
+  created lab3.sql
+
+- Make sure you use the correct single quote character! This ' instead of 
+  this ’ or this ‘. There were several errors:
+   ERROR:  unterminated quoted string at or near "'Dallas’)"
+   LINE 1:  Select name, city from customers where city in ('Dallas’)
+                                                                   ^
+   ERROR:  unterminated quoted string at or near "'Tokyo’)"
+   LINE 1: ...ect name from agents where city not in ('New York', 'Tokyo’)
+                                                                        ^
+   ERROR:  column "‘mar’" does not exist
+   LINE 1:  select * from orders where mon in ('jan', ‘mar’)
+                                                      ^
+   ERROR:  unterminated quoted string at or near "'c005’)"
+   LINE 1:  select * from orders where cid = ('c005’)
+                                                   ^
+- Make sure your name is somewhere in the .sql file.
+
+
+- Dr. Rivas
