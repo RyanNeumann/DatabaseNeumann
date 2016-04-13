@@ -1,0 +1,112 @@
+-- Ryan Neumann
+-- 4/13/16
+-- CMPT 308
+-- Professor Rivas
+
+drop table if exists People;
+drop table if exists Actors;
+drop table if exists Directors;
+drop table if exists Crew;
+drop table if exists MovieData;
+
+-- SQL Create statements/Functional Dependencies for each table
+create table People (
+       pid varchar(4) not null unique,
+       FirstName text,
+       LastName text,
+       DateOfBirth date,
+       Address text,
+       City text,
+       State text,
+       SpouseName text,
+       Zip numeric(5),
+   primary key(pid)
+);
+
+create type HairColor as enum (
+        'Brown',
+        'Black',
+        'Blonde',
+        'Dirty Blonde',
+        'Other'
+);
+
+create type EyeColor as enum (
+       'Brown',
+       'Blue',
+       'Green',
+       'Gray',
+       'Other'
+);
+
+create type FavColor as enum (
+	'Red',
+	'Orange',
+	'Yellow',
+	'Green',
+	'Blue',
+	'Purple'	
+);
+-- Create actors table
+create table Actors (
+        aid varchar(4) not null references people(pid),
+        HairColor HairColor,
+        EyeColor EyeColor,
+        Height numeric(2),
+        Weight Numeric(3),
+        FavColor FavColor,
+	ActorGuildAnni date,
+    primary key (aid)
+);
+-- Create Directors table
+create table Directors (
+        did varchar(4) not null references people(pid),
+        FilmSchool text,
+        FavLens text,
+        DirGuildAnni date,
+    primary key (did)
+);
+
+-- Create Crew table
+create table Crew (
+        aid varchar(4) not null references actors(aid),
+        mid varchar(4) not null references movies(mid),
+        did varchar(4) not null references dierctors(did),
+    primary key (aid, mid, did)
+);
+
+create type rating as enum (
+        'G',
+        'PG',
+        'PG-13',
+        'R',
+        'NR'
+);
+
+create table MovieData (
+        mid varchar(4) not null unique,
+        Name text,
+        YearReleased Numeric(4),
+        MPAA rating,
+        BoxOfficeSales numeric(14,2),
+        DVDSales numeric(12,2),
+    primary key (mid)
+);
+
+-- Write a query to show all the directors with whom actor “Keanu Reeves” has worked.
+SELECT p.FirstName, p.LastName
+FROM People p
+WHERE p.pid=( SELECT d.did
+              		FROM Directors d
+ 		        WHERE d.did=( SELECT c.did
+                            			FROM Crew c
+		                                WHERE c.mid=( SELECT m.mid
+                    			                        	 FROM MovieData m
+				                                         WHERE m.mid=( SELECT c.mid
+          			                                              			   FROM Crew c
+		                                    		                                   WHERE c.aid=( SELECT a.aid
+                                                      				                         		   FROM Actors a
+                                                                        				 		   WHERE a.aid=( SELECT p.pid
+                                                                                      						 		   FROM People p
+                                                                                      						 		   WHERE FirstName == 'Keanu'
+                                                                                        					 		   AND LastName == 'Reeves' ))))));
