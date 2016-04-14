@@ -64,6 +64,7 @@ create table Directors (
         FilmSchool text,
         FavLens text,
         DirGuildAnni date,
+        SpouseName text,
     primary key (did)
 );
 
@@ -82,7 +83,7 @@ create type rating as enum (
         'R',
         'NR'
 );
-
+-- Create movie table
 create table MovieData (
         mid varchar(4) not null unique,
         Name text,
