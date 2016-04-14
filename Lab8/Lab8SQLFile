@@ -64,7 +64,6 @@ create table Directors (
         FilmSchool text,
         FavLens text,
         DirGuildAnni date,
-        SpouseName text,
     primary key (did)
 );
 
