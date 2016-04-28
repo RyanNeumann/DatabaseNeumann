@@ -34,11 +34,12 @@ where pid  = 'p01' INTERSECT	(Select cid
 	                       where pid = 'p07');
  
 --5.Get the ids of products not ordered by any customers who placed any order through agent a07 in pid
+-- you missed a semicolon on this one!
 Select distinct pid 
 from orders 
 where cid not in (select cid
                   from orders 
-                  where aid= 'a07')
+                  where aid= 'a07');
 --order from highest to lowest.
 --6.Get the name, discounts, and city for all customers who place orders through agents in London or New
 --York.
