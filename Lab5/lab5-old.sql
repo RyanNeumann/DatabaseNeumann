@@ -46,15 +46,14 @@ Where c.city = a.city;
 --6.  Show the name of customers and agents living in the same city, 
 --    along with the name of the shared city, regardless of whether 
 --    or not the customer has ever placed an order with that agent.
--- YOU MISSED A SEMICOLON HERE!!!
+
 SELECT c.name, a.agents, c.city
 FROM customers c, agents a
-where c.city = a.city;
+where c.city = a.city
 
 --7.  Show the name and city of customers who live in the city that 
 --    makes the feewest different kind of products.  (Hint: use count
 --    and group by on the products table).
--- YOU MISSED A SEMICOLON HERE!!!
 
 Select c.name, c.city
 From customers c
@@ -62,4 +61,4 @@ Where c.city in (Select city
 		From products
 		Group by city
 		Order by count (pid) asc
-		Limit 1);
+		Limit 1)
